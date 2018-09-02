@@ -1,0 +1,6 @@
+.idea
+*.pyc
+*.pyo
+const.py
+*.splite3
+__pycache__
