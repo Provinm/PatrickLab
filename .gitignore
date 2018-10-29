@@ -4,3 +4,5 @@
 const.py
 *.splite3
 __pycache__
+*.log
+.vscode

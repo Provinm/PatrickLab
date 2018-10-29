@@ -11,13 +11,16 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import sys
 from .const import set_env
 
 # set necessary os viribles
 set_env()
 
+UNDER_WINDOWS = sys.platform == "win32"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOGGER_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "ebrose.log"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +40,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'ebrose.apps.EbroseConfig',
+    "rest_framework",
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -107,6 +111,38 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+
+# LOGGING
+LOGGING = {
+    "version": 1,
+    "disable_exsiting_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{asctime}{filename}{funcName}{thread:d}{message}",
+            "style": "{"
+        }
+    },
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": LOGGER_PATH
+        },
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+        }
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file", "console"],
+            "level": "DEBUG",
+            "propagate": True
+        }
+    }
+}
 
 
 # Internationalization

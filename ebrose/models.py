@@ -7,7 +7,8 @@ class Poetry(models.Model):
     '''
     author = models.ForeignKey("Author", verbose_name="作者", on_delete=models.SET_DEFAULT, 
                                default="佚名")
-    paragraph = models.TextField("正文")
+    paragraphs = models.TextField("正文")
+    dynasty = models.CharField("朝代", max_length=20, default=" ")
     title = models.CharField("标题", max_length=100, default=" ")
     rhythmic = models.CharField("词牌名", max_length=100, default=" ")
 
