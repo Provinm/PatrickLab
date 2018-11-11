@@ -162,7 +162,7 @@ class ImportSC(object):
 
 if __name__ == "__main__":
 
-    file_path = r"D:\github\clone\chinese-poetry"
+    file_path = r"/home/zhouxin/Documents/projects/chinese-poetry"
     isc = ImportSC(file_path)
     isc.run()
 

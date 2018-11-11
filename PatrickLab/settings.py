@@ -12,10 +12,15 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
-from .const import set_env
+from .conf import set_env
 
 # set necessary os viribles
 set_env()
+
+# 百度语音识别
+AIP_APP_ID = "11759968"
+AIP_API_KEY = "reR65KYW8omwyQk9fhVXbGMx"
+AIP_SECRETE_KEY = "xBPDPtfSvwA2dOuFii5VoHyPbeIdUTH3"
 
 UNDER_WINDOWS = sys.platform == "win32"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
