@@ -14,5 +14,6 @@ from rest_framework import routers
 urlpatterns = [
     # path(r'upload', views.index),
     path(r'api/', views.PoetryView.as_view()),
-    path(r"asr/", views.AsrView.as_view())
+    path(r"asr/", views.AsrView.as_view()),
+    path(r"tts/", views.TTSView.as_view())
 ]

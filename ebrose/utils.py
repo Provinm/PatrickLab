@@ -4,24 +4,28 @@ import os
 import time
 from pydub import AudioSegment
 
-def convert_format(in_memory_audio, _out_format="pcm"):
+def convert_format(in_memory_audio, _out_format="wav"):
+    '''convert memoryfile(mp3) to bytes(wav)
 
-    file_name = in_memory_audio.name.split("=")[-1]
-    file_path = "."
-    # ase = AudioSegment()
-
-    path = os.path.abspath(os.path.join(file_path, file_name))
-    print(f"save to {path}")
-    with open(path, "wb+")as f:
-        f.write(in_memory_audio.read())
-
-    
-    ase = AudioSegment.from_mp3(path)
-    ase.export("321.pcm", format=_out_format)
-
-    with open(path, "rb")as f:
-        return f.read()
+    codes below may be hard to understand
+    u should read source code of pydub
+    '''
+    ase = AudioSegment.from_mp3(in_memory_audio)
+    return ase._data
 
 
+class LikeFile(object):
 
+    def __init__(self, content):
 
+        self.content = content
+
+    def read(self):
+
+        return self.content
+
+    def close(self):
+
+        pass
+
+        
