@@ -20,7 +20,7 @@ django.setup()
 
 import json
 
-from ebrose.models import Author, Poetry
+from ebrose.models import Author, Poetry, Sentence
 
 class ImportSC(object):
     '''
@@ -104,6 +104,12 @@ class ImportSC(object):
         # get auther instance
         author, _ = Author.objects.get_or_create(name=_data.get("author", ""))
         # update author info
+        # author = _data.get('author', '')
+        # print(f"{author}")
+
+        # pa = _data["paragraphs"]
+        # print(f"type = {type(pa)} {pa}")
+
 
         # create new poet object
         if _type == "ci":
@@ -124,7 +130,11 @@ class ImportSC(object):
             if key in self._poet_slots:
                 new_dct[key] = value
 
-        Poetry.objects.create(**new_dct)
+        poetry = Poetry.objects.create(**new_dct)
+
+        for item in _data["paragraphs"]:
+            Sentence.objects.create(poetry=poetry, text=item)
+
 
     def _analyse_bulk(self, _type, _dy, _bulk):
         '''bulk analysis

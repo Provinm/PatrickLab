@@ -62,3 +62,20 @@ class TTSView(APIView):
             response = HttpResponse(content_type="audio/mp3")
             response.write(content)
             return response
+            
+
+class SearchView(APIView):
+    '''用户搜索相应的令词，返回所有含该令词的诗句
+    '''
+
+    def get(self, request, *args, **kw):
+
+        pivot = request.query_params.get("text", "")
+
+        if not pivot:
+            return JsonResponse({"err", "empty text"})
+
+        # 现在 redis 中寻找
+
+        # 然后在 mongo 中寻找
+        return HttpResponse("hello world")

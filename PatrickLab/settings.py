@@ -12,10 +12,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
-from .conf import set_env
 
-# set necessary os viribles
-set_env()
+import redis
+
 
 # 百度语音识别
 AIP_APP_ID = "11759968"
@@ -32,7 +31,7 @@ LOGGER_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("EBROSE_SECRET_KEY")
+SECRET_KEY = "n1e!h(cc0@d_n0ur$f9b4mcq49j$c@w3o5#(9(=b5b#1%i0^-4"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,9 +89,9 @@ WSGI_APPLICATION = 'PatrickLab.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DJANGO_MYSQL_USER'),
-        'PASSWORD': os.environ.get('DJANGO_MYSQL_PASSWORD'),
+        'NAME': "ebrose",
+        'USER': "zhouxin",
+        'PASSWORD': "782744680",
         # 'HOST': os.environ.get('DJANGO_MYSQL_HOST'),
         'PORT': 3306,
     }
@@ -149,6 +148,7 @@ LOGGING = {
     }
 }
 
+# link to redis
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

@@ -25,6 +25,16 @@ class Poetry(models.Model):
     def __str__(self):
         return self.title
 
+class Sentence(models.Model):
+    '''每一句诗词
+    '''
+
+    poetry = models.ForeignKey("Poetry", verbose_name="诗词名", on_delete=models.SET_DEFAULT, default="空")
+    text = models.TextField("句")
+
+    def __str__(self):
+        return self.text
+    
 
 class Author(models.Model):
     '''作者
