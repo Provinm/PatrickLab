@@ -2,6 +2,8 @@
 
 import os
 import time
+import string
+import random
 from pydub import AudioSegment
 
 def convert_format(in_memory_audio, _out_format="wav"):
@@ -14,18 +16,10 @@ def convert_format(in_memory_audio, _out_format="wav"):
     return ase._data
 
 
-class LikeFile(object):
-    
-    def __init__(self, content):
-
-        self.content = content
-
-    def read(self):
-
-        return self.content
-
-    def close(self):
-
-        pass
-
-        
+def gen_cookie(k:int = 8):
+    ascii_le = string.ascii_letters
+    digits = string.digits
+    str_dir = ascii_le + digits
+    lst_dir = list(str_dir * 10)
+    cookie = ''.join(random.sample(lst_dir,k))
+    return cookie

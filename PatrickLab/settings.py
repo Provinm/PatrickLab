@@ -17,27 +17,27 @@ import redis
 
 
 # 百度语音识别
-AIP_APP_ID = "11759968"
-AIP_API_KEY = "reR65KYW8omwyQk9fhVXbGMx"
-AIP_SECRETE_KEY = "xBPDPtfSvwA2dOuFii5VoHyPbeIdUTH3"
+AIP_APP_ID = os.environ["EBROSE_AIP_APP_ID"]
+AIP_API_KEY = os.environ["EBROSE_AIP_API_KEY"]
+AIP_SECRETE_KEY = os.environ["EBROSE_AIP_SECRETE_KEY"]
 
 UNDER_WINDOWS = sys.platform == "win32"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOGGER_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "ebrose.log"))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "n1e!h(cc0@d_n0ur$f9b4mcq49j$c@w3o5#(9(=b5b#1%i0^-4"
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ["DJANGO_DEBUG_SWITCH"]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ["DJANGO_ALLOW_HOSTS"]
 
+REDIS_HOST = os.environ["EBROSE_MYSQL_HOST"]
 
 # Application definition
 
@@ -89,14 +89,38 @@ WSGI_APPLICATION = 'PatrickLab.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "ebrose",
-        'USER': "zhouxin",
-        'PASSWORD': "782744680",
-        # 'HOST': os.environ.get('DJANGO_MYSQL_HOST'),
-        'PORT': 3306,
+        'NAME': os.environ["EBROSE_MYSQL_DB_NAME"],
+        'USER': os.environ["EBROSE_MYSQL_USER"],
+        'PASSWORD': os.environ["EBROSE_MYSQL_PASSWORD"],
+        'HOST': os.environ["EBROSE_MYSQL_HOST"],
+        'PORT': os.environ["EBROSE_MYSQL_PORT"]
     }
 }
 
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_HOST + "1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+    "session": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_HOST + "2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+    "remain": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_HOST + "3",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

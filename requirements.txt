@@ -2,3 +2,6 @@ pymysql
 requests
 redis
 pydub
+django
+djangorestframework
+uwsgi

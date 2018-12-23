@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.TextField(verbose_name='句')),
-                ('poetry', models.ForeignKey(default='空', on_delete=django.db.models.deletion.SET_DEFAULT, to='ebrose.Poetry', verbose_name='诗词名')),
+                ('poetry', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ebrose.Poetry', verbose_name='诗词名')),
             ],
         ),
     ]

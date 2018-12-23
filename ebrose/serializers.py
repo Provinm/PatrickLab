@@ -9,3 +9,4 @@ class PoetrySerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Poetry
 		fields = ("title", "paragraphs")
+		

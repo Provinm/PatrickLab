@@ -6,3 +6,5 @@ const.py
 __pycache__
 *.log
 .vscode
+osenv.py
+000*.py

@@ -1,6 +1,22 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    wechat_name = models.CharField('微信昵称', max_length=100, default="匿名用户")
+    openid = models.CharField('用户标识', max_length=100, blank=True, null=True)
+    cookie = models.CharField('用户认证标识', max_length=100, blank=True, null=True)
+    GENDER = (
+        (1, '男'),
+        (2, '女'),
+        (0, '未知')
+    )
+    gender = models.IntegerField('性别', choices=GENDER, default=0)
+    city = models.CharField('城市', max_length=100, blank=True, null=True)
+    province = models.CharField('省份', max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.wechat_name
 
 class Poetry(models.Model):
     '''诗词内容
@@ -29,7 +45,7 @@ class Sentence(models.Model):
     '''每一句诗词
     '''
 
-    poetry = models.ForeignKey("Poetry", verbose_name="诗词名", on_delete=models.SET_DEFAULT, default="空")
+    poetry = models.ForeignKey("Poetry", verbose_name="诗词名", related_name="sentence", on_delete=models.CASCADE)
     text = models.TextField("句")
 
     def __str__(self):

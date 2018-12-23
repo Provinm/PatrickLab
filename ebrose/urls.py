@@ -15,5 +15,6 @@ urlpatterns = [
     # path(r'upload', views.index),
     path(r'api/', views.PoetryView.as_view()),
     path(r"asr/", views.AsrView.as_view()),
-    path(r"tts/", views.TTSView.as_view())
+    path(r"tts/", views.TTSView.as_view()),
+    path(r"pivot/", views.PivotView.as_view())
 ]
