@@ -1,0 +1,43 @@
+# launch yml
+
+version : "2"
+
+services:
+
+  mysql:
+    images: mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
+    expose:
+      - "3306"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=782744680
+      - MYSQL_DATABASE=ebrose
+      - MYSQL_USER=zhouxin
+      - MYSQL_PASSWORD=782744680
+
+    nginx:
+      image: nginx
+      volumes:
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      ports:
+        - "80:80"
+      depends_on:
+        - ebrose
+
+    redis:
+      image: redis
+      expose:
+        - "6379"
+    
+    PatrickLab:
+      image: patricklab
+      command: uwsgi --ini server/PatrickLab/conf/lab.conf
+      expose:
+        - "8000"
+        - "80"
+      depends_on:
+        - mysql
+        - redis
+    

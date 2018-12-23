@@ -14,7 +14,9 @@ import os
 import sys
 
 import redis
+from .osenv import set_os_env
 
+set_os_env()
 
 # 百度语音识别
 AIP_APP_ID = os.environ["EBROSE_AIP_APP_ID"]
