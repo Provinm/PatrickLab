@@ -2,8 +2,7 @@ FROM python:3.7
 
 WORKDIR /server
 
-ADD ../requirements.txt /server/requirements.txt
-ADD ./sources.list /etc/apt
+ADD ../requirements.txt /server/
 
 # RUN pip install git+https://github.com/Supervisor/supervisor
 RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
